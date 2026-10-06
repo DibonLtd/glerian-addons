@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="partner_ledger_pdf_export_company_information">
+            <t t-set="company_names" t-value="[company['name'] for company in options.get('companies', [])] or [env.company.name]"/>
+
+            <div class="o_glerian_ledger_brand">
+                <div class="o_glerian_ledger_brand_badge">Glerian</div>
+            </div>
+
+            <div class="o_glerian_ledger_company">
+                <t t-if="env.company.logo">
+                    <div class="o_glerian_ledger_logo_shell">
+                        <span t-field="env.company.logo" t-options='{"widget": "image", "qweb_img_responsive": False, "class": "o_glerian_ledger_logo", "style": "display: block; margin: 0; max-width: 280px; max-height: 92px;"}' alt="Logo"/>
+                    </div>
+                </t>
+                <div class="fw-semibold o_glerian_ledger_company_name" t-out="', '.join(company_names)"/>
+                <address class="mb-0 o_glerian_ledger_company_address" t-field="env.company.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+                <div class="o_glerian_ledger_tax">
+                    <span class="o_glerian_ledger_tax_label">
+                        <t t-if="env.company.account_fiscal_country_id.vat_label" t-out="env.company.account_fiscal_country_id.vat_label"/>
+                        <t t-else="">Tax ID</t>
+                    </span>
+                    <span class="o_glerian_ledger_tax_value">
+                        <t t-if="options.get('tax_unit', 'company_only') == 'company_only'">
+                            <t t-out="env.company.vat or '-'"/>
+                        </t>
+                        <t t-else="">
+                            <t t-out="env['account.tax.unit'].browse(options.get('tax_unit')).vat or '-'"/>
+                        </t>
+                    </span>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

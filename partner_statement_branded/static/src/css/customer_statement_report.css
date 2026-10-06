@@ -1,0 +1,236 @@
+.o_customer_statement {
+    color: #0f172a;
+    font-family: "DejaVu Sans", Arial, sans-serif;
+}
+
+.o_customer_statement .o_statement_hero,
+.o_customer_statement .o_statement_summary,
+.o_customer_statement .o_statement_table_wrap,
+.o_customer_statement .o_figures_note,
+.o_customer_statement .o_balance_due {
+    page-break-inside: avoid;
+}
+
+.o_customer_statement .o_statement_hero {
+    background: linear-gradient(135deg, #0f172a 0%, #134e4a 55%, #0f766e 100%);
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 24px 28px;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+}
+
+.o_customer_statement .o_statement_kicker {
+    margin-bottom: 0.45rem;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.72;
+}
+
+.o_customer_statement .o_statement_title {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.05;
+}
+
+.o_customer_statement .o_statement_period {
+    margin-top: 0.55rem;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.o_customer_statement .o_statement_meta {
+    margin-top: 0.55rem;
+    font-size: 13px;
+    line-height: 1.65;
+    opacity: 0.9;
+}
+
+.o_customer_statement .o_statement_partner_card {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+    padding: 14px 16px;
+}
+
+.o_customer_statement .o_statement_partner_card address,
+.o_customer_statement .o_statement_partner_card .o_statement_card_label {
+    color: #ffffff;
+}
+
+.o_customer_statement .o_statement_summary {
+    height: 100%;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 18px;
+    padding: 18px 20px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+}
+
+.o_customer_statement .o_statement_card_label {
+    margin-bottom: 0.45rem;
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.o_customer_statement .o_summary_amount {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.05;
+}
+
+.o_customer_statement .o_summary_hint {
+    margin-top: 0.5rem;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.o_customer_statement .o_statement_table_wrap {
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+}
+
+.o_customer_statement table.o_statement_table {
+    margin-bottom: 0;
+}
+
+.o_customer_statement table.o_statement_table thead th {
+    background: #0f172a;
+    color: #ffffff;
+    border-color: #0f172a;
+    padding: 0.9rem 0.85rem;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.o_customer_statement table.o_statement_table tbody td {
+    border-color: #e2e8f0;
+    padding: 0.85rem 0.85rem;
+    vertical-align: middle;
+}
+
+.o_customer_statement table.o_statement_table tbody tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+.o_customer_statement table.o_statement_table tbody tr.o_statement_initial {
+    background: #eef2ff;
+}
+
+.o_customer_statement table.o_statement_table tbody tr.o_statement_initial td {
+    font-weight: 700;
+}
+
+.o_customer_statement .o_line_type {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.18rem 0.62rem;
+    border-radius: 999px;
+    background: #e2e8f0;
+    color: #334155;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    vertical-align: middle;
+}
+
+.o_customer_statement .o_line_type_payment {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.o_customer_statement .o_line_reference {
+    margin-top: 0.18rem;
+    color: #64748b;
+    font-size: 12px;
+}
+
+.o_customer_statement .o_amount_positive {
+    color: #0f766e;
+    font-weight: 700;
+}
+
+.o_customer_statement .o_amount_negative {
+    color: #b91c1c;
+    font-weight: 700;
+}
+
+.o_customer_statement .o_amount_muted {
+    color: #475569;
+    font-weight: 600;
+}
+
+.o_customer_statement .o_figures_note {
+    height: 100%;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    padding: 18px 22px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+}
+
+.o_customer_statement .o_figures_note p {
+    margin-bottom: 0;
+    color: #475569;
+}
+
+.o_customer_statement .o_balance_due {
+    height: 100%;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 18px 22px;
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.16);
+}
+
+.o_customer_statement .o_balance_due .label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.72;
+}
+
+.o_customer_statement .o_balance_due .value {
+    margin-top: 0.25rem;
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.05;
+}
+
+.o_customer_statement .o_balance_due .sub {
+    margin-top: 0.5rem;
+    font-size: 12px;
+    opacity: 0.78;
+}
+
+.o_customer_statement .o_footer_note {
+    margin-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 0.95rem;
+    color: #475569;
+}
+
+.o_customer_statement .o_footer_note_title {
+    margin-bottom: 0.35rem;
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+}
+
+.o_customer_statement .o_footer_note_text {
+    white-space: pre-line;
+}

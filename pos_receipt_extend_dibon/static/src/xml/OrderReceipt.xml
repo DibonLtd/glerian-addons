@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_receipt_extend_dibon.CustomerDetails"
+       t-inherit="point_of_sale.OrderReceipt"
+       t-inherit-mode="extension" owl="1">
+        <xpath expr="//ReceiptHeader" position="after">
+            <t t-if="dibonCustomerName or dibonCustomerVat">
+                <div class="pos-dibon-customer"
+                     style="padding: 1px 0; text-align: center; font-size: 12px; line-height: 1.2; white-space: normal; overflow-wrap: anywhere;">
+                    <t t-if="dibonCustomerName">
+                        Customer: <t t-esc="dibonCustomerName"/>
+                    </t>
+                    <t t-if="dibonCustomerName and dibonCustomerVat">
+                        <span> | </span>
+                    </t>
+                    <t t-if="dibonCustomerVat">
+                        KRA Pin: <t t-esc="dibonCustomerVat"/>
+                    </t>
+                </div>
+            </t>
+        </xpath>
+    </t>
+</templates>

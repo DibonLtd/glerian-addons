@@ -1,0 +1,221 @@
+/*
+    Branded PDF export styling for the Partner Ledger.
+    This file is loaded in account_reports.assets_pdf_export.
+*/
+
+.o_content.partner_ledger_branded {
+    color: #0f172a;
+    font-family: "DejaVu Sans", Arial, sans-serif;
+
+    header {
+        margin-bottom: 10px;
+        padding: 10px 14px 12px;
+        border-radius: 10px;
+        background-color: #d8dce2;
+        color: #111827;
+
+        .o_title {
+            margin-bottom: 8px;
+            color: #111827;
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .o_header_font,
+        .o_header_font *,
+        .o_text_muted,
+        address {
+            color: #374151 !important;
+        }
+
+        .o_glerian_ledger_brand {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .o_glerian_ledger_brand_badge {
+            display: inline-block;
+            padding: 3px 9px;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.82);
+            color: #0f766e;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .o_glerian_ledger_logo_shell {
+            display: inline-block;
+            margin: 0 0 8px;
+            padding: 10px 18px;
+            border: 1px solid rgba(15, 23, 42, 0.1);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.94);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+            line-height: 0;
+            text-align: left;
+            max-width: 100%;
+        }
+
+        .o_glerian_ledger_logo {
+            display: block;
+            margin: 0;
+            max-width: 280px;
+            max-height: 92px;
+            object-fit: contain;
+        }
+
+        .o_glerian_ledger_company {
+            text-align: left;
+        }
+
+        .o_glerian_ledger_company_name {
+            color: #111827;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .o_glerian_ledger_company_address {
+            text-align: left;
+        }
+
+        .o_glerian_ledger_tax {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            gap: 4px;
+            margin-top: 4px;
+            max-width: 100%;
+        }
+
+        .o_glerian_ledger_tax_label {
+            color: #6b7280;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .o_glerian_ledger_tax_value {
+            color: #111827;
+            font-size: 12px;
+            font-weight: 700;
+            white-space: normal;
+        }
+    }
+
+    .o_table {
+        width: 100%;
+        margin: 0 auto 24px;
+        padding: 0;
+        border: 1px solid #dbe3ec;
+        border-radius: 18px;
+        background: #fff;
+        box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+        font-size: 0.8rem;
+
+        // Define direction attribute here so rtlcss can convert it properly.
+        direction: ltr;
+
+        > :not(caption) > * > * {
+            padding: 0.3rem 0.75rem;
+        }
+
+        thead,
+        tbody,
+        tfoot,
+        tr,
+        td,
+        th {
+            border-style: none;
+        }
+
+        > thead {
+            background: #0f172a;
+            color: #fff;
+            white-space: nowrap;
+
+            tr > th:first-child {
+                width: 100%;
+            }
+
+            > tr:not(:last-child) th:not(:first-child) {
+                border: 1px solid #0f172a;
+                background: #0f172a;
+                color: #fff;
+                text-align: center;
+            }
+
+            th {
+                font-size: 10.5px;
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+            }
+        }
+
+        > tbody {
+            white-space: nowrap;
+
+            tr {
+                height: 20px;
+                vertical-align: middle;
+            }
+
+            tr:nth-child(even) {
+                background: #f8fafc;
+            }
+
+            td {
+                max-width: 340px;
+                word-wrap: break-word;
+            }
+
+            .o_line_level_0 {
+                background-color: #eef2ff;
+                color: #0f172a;
+                font-weight: 700;
+
+                .o_line_name_level {
+                    padding-left: 10px;
+                }
+            }
+
+            @for $i from 1 through 3 {
+                .o_line_level_#{$i} {
+                    border-bottom: 0.5px solid #dbe3ec;
+
+                    .o_line_name_level {
+                        padding-left: (($i + 1) * 8px);
+                    }
+                }
+            }
+
+            @for $i from 4 through 16 {
+                .o_line_level_#{$i} {
+                    border-bottom: 0.5px solid #e5e7eb;
+
+                    .o_line_name_level {
+                        padding-left: (($i + 1) * 8px);
+                    }
+                }
+            }
+
+            .o_cell_td > .o_line_cell_value_number {
+                display: block;
+                text-align: right;
+            }
+        }
+    }
+
+    .o_footnote {
+        margin-top: 18px;
+    }
+}

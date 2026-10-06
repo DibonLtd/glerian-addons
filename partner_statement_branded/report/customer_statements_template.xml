@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Branded Customer Statement Template -->
+        <template id="customer_statements">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="p">
+                    <t t-set="o" t-value="p"/>
+                    <t t-set="partner_lines" t-value="lines[str(p.id)]"/>
+                    <t t-set="statement" t-value="statement_summaries[str(p.id)]"/>
+                    <t t-set="balance_due_label" t-value="'Credit Balance' if statement['balance_due_raw'] &lt; 0 else 'Balance Due'"/>
+                    <t t-call="web.external_layout">
+                        <div class="page o_customer_statement">
+                            <div class="o_statement_hero mb-4">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-lg-8">
+                                        <div class="o_statement_kicker">Customer Statement</div>
+                                        <h2 class="o_statement_title">
+                                            <span t-out="p.display_name"/>
+                                        </h2>
+                                        <div class="o_statement_meta">
+                                            <span>Statement period:</span>
+                                            <span class="fw-semibold ms-1" t-out="from_date"/>
+                                            <span class="mx-2">to</span>
+                                            <span class="fw-semibold" t-out="to_date"/>
+                                            <span class="mx-2">|</span>
+                                            <span>Transactions:</span>
+                                            <span class="fw-semibold ms-1" t-out="statement['transaction_count']"/>
+                                            <span class="mx-2">|</span>
+                                            <span>Currency:</span>
+                                            <span class="fw-semibold ms-1" t-out="company.currency_id.name"/>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 text-lg-end">
+                                        <div class="d-inline-block text-start o_statement_partner_card">
+                                            <div class="o_statement_card_label">Prepared for</div>
+                                            <address class="mb-0" t-field="p.self" t-options='{"widget": "contact", "fields": ["address", "name", "vat"], "no_marker": True, "align_right": True}'/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row g-3 mb-4">
+                                <div class="col-md-4">
+                                    <div class="o_statement_summary">
+                                        <div class="o_statement_card_label">Opening balance</div>
+                                        <div t-att-class="'o_summary_amount %s' % ('o_amount_negative' if statement['opening_balance_raw'] &gt; 0 else 'o_amount_positive' if statement['opening_balance_raw'] &lt; 0 else 'o_amount_muted')">
+                                            <span t-out="statement['opening_balance']"/>
+                                        </div>
+                                        <div class="o_summary_hint">Carried into the selected period.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="o_statement_summary">
+                                        <div class="o_statement_card_label">Period movement</div>
+                                        <div t-att-class="'o_summary_amount %s' % ('o_amount_negative' if statement['period_movement_raw'] &gt; 0 else 'o_amount_positive' if statement['period_movement_raw'] &lt; 0 else 'o_amount_muted')">
+                                            <span t-out="statement['period_movement']"/>
+                                        </div>
+                                        <div class="o_summary_hint">Net of all entries in the statement range.</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="o_statement_summary">
+                                        <div class="o_statement_card_label"><span t-out="balance_due_label"/></div>
+                                        <div t-att-class="'o_summary_amount %s' % ('o_amount_negative' if statement['balance_due_raw'] &gt; 0 else 'o_amount_positive' if statement['balance_due_raw'] &lt; 0 else 'o_amount_muted')">
+                                            <span t-out="statement['balance_due']"/>
+                                        </div>
+                                        <div class="o_summary_hint">As of <span t-out="to_date"/></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="o_statement_table_wrap">
+                                <table class="table table-borderless o_statement_table">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-start" scope="col">Date</th>
+                                            <th class="text-start" scope="col">Activity</th>
+                                            <th class="text-start" scope="col">Due Date</th>
+                                            <th class="text-end" scope="col">Amount</th>
+                                            <th class="text-end" scope="col">Balance <span t-out="company.currency_id.name"/></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr t-foreach="partner_lines" t-as="line" t-att-class="'o_statement_initial' if line['line_kind'] == 'opening' else ''">
+                                            <td class="align-middle">
+                                                <span t-out="line['date']"/>
+                                            </td>
+                                            <td>
+                                                <span t-if="line['line_kind'] == 'opening'" class="o_line_type">Opening</span>
+                                                <span t-elif="line['line_kind'] == 'payment'" class="o_line_type o_line_type_payment">Payment</span>
+                                                <span t-elif="line['move_type']" class="o_line_type" t-out="line['move_type']"/>
+                                                <span class="fw-semibold ms-2" t-out="line['activity']"/>
+                                                <div t-if="line['reference']" class="o_line_reference">
+                                                    <span>Ref:</span>
+                                                    <span t-out="line['reference']"/>
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <span t-out="line['due_date']"/>
+                                            </td>
+                                            <td class="text-end align-middle">
+                                                <span t-att-class="'%s' % ('o_amount_negative' if line['amount_raw'] &gt; 0 else 'o_amount_positive' if line['amount_raw'] &lt; 0 else 'o_amount_muted')">
+                                                    <span t-out="line['amount']"/>
+                                                </span>
+                                            </td>
+                                            <td class="text-end align-middle">
+                                                <span t-att-class="'%s' % ('o_amount_negative' if line['balance_raw'] &gt; 0 else 'o_amount_positive' if line['balance_raw'] &lt; 0 else 'o_amount_muted')">
+                                                    <span t-out="line['balance']"/>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="row g-3 mt-4 align-items-stretch">
+                                <div class="col-lg-7">
+                                    <div class="o_figures_note">
+                                        <div class="o_statement_card_label">How to read this statement</div>
+                                        <p>
+                                            Opening balance is the amount brought forward from prior transactions.
+                                            Period movement is the net effect of all entries within the selected dates.
+                                            The balance due is the outstanding amount at the end of the period.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="o_balance_due text-lg-end">
+                                        <div class="label">
+                                            <span t-out="balance_due_label"/>
+                                        </div>
+                                        <div t-att-class="'value %s' % ('o_amount_negative' if statement['balance_due_raw'] &gt; 0 else 'o_amount_positive' if statement['balance_due_raw'] &lt; 0 else 'o_amount_muted')">
+                                            <span t-out="statement['balance_due']"/>
+                                        </div>
+                                        <div class="sub">As of <span t-out="to_date"/></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <t t-if="p.statement_footer_text">
+                                <div class="o_footer_note">
+                                    <div class="o_footer_note_title">Statement note</div>
+                                    <div class="o_footer_note_text" t-out="p.statement_footer_text"/>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>
